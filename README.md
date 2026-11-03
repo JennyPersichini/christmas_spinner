@@ -2,7 +2,9 @@
 
 Un lettore musicale natalizio a forma di giradischi: un vinile che gira a ritmo di musica, la neve che cade e una sorpresa da scoprire.
 
-**[Guarda la demo](LINK_DEMO)**
+**[Guarda la demo](https://christmasspinner.vercel.app)**
+
+![Anteprima di Christmas Spinner](screenshot.png)
 
 ## Funzionalità
 
