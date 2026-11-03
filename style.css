@@ -1,0 +1,224 @@
+:root {
+  --rosso: #c0392b;
+  --rosso-scuro: #8e1b12;
+  --verde: #1e5631;
+  --verde-scuro: #0f2e1a;
+  --oro: #f1c40f;
+  --bianco: #fdfdfd;
+}
+
+body {
+  background: radial-gradient(circle at top, var(--verde) 0%, var(--verde-scuro) 70%);
+  color: var(--bianco);
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---------- DISCO ---------- */
+.disc-wrapper {
+  position: relative;
+  width: min(300px, 75vw);
+  aspect-ratio: 1;
+}
+
+.disc {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* solchi del vinile */
+  background:
+    repeating-radial-gradient(circle, #111 0 2px, #1c1c1c 2px 4px),
+    #111;
+  box-shadow: 0 0 0 6px var(--rosso), 0 0 30px rgba(241, 196, 15, .35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 3s linear infinite;
+  animation-play-state: paused; /* parte solo con play */
+}
+
+.disc.playing {
+  animation-play-state: running;
+}
+
+/* etichetta centrale */
+.disc-label {
+  width: 38%;
+  height: 38%;
+  border-radius: 50%;
+  background: conic-gradient(var(--rosso) 0 25%, var(--bianco) 0 50%, var(--rosso) 0 75%, var(--bianco) 0);
+  border: 4px solid var(--oro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* buco centrale */
+.disc-label::after {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  background: var(--verde-scuro);
+  border-radius: 50%;
+}
+
+.label-icon {
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  filter: drop-shadow(0 0 4px rgba(0,0,0,.5));
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* braccetto */
+.tonearm {
+  position: absolute;
+  top: -6%;
+  right: -4%;
+  width: 8px;
+  height: 55%;
+  background: linear-gradient(var(--oro), #b8920b);
+  border-radius: 4px;
+  transform-origin: top center;
+  transform: rotate(-10deg);
+  transition: transform .6s ease;
+}
+
+.tonearm::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  translate: -50% 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--oro);
+}
+
+.tonearm.on {
+  transform: rotate(22deg);
+}
+
+/* ---------- INFO TRACCIA ---------- */
+.track-title {
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.track-count, .time {
+  opacity: .75;
+  font-size: .85rem;
+}
+
+.progress-box {
+  max-width: 420px;
+}
+
+.progress {
+  height: 8px;
+  background: rgba(255,255,255,.2);
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 0%;
+  background: var(--oro);
+  transition: width .2s linear;
+}
+
+/* ---------- BOTTONI ---------- */
+.btn-xmas {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--rosso);
+  color: var(--bianco);
+  font-size: 1.4rem;
+  border: 3px solid var(--oro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s, background .15s;
+}
+
+.btn-xmas:hover {
+  background: var(--rosso-scuro);
+  color: var(--bianco);
+  transform: scale(1.08);
+}
+
+.btn-xmas.active {
+  background: var(--oro);
+  color: var(--rosso-scuro);
+}
+
+.btn-gold {
+  background: var(--oro);
+  color: var(--rosso-scuro);
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+}
+
+.btn-gold:hover {
+  background: #ffd83d;
+  color: var(--rosso-scuro);
+}
+
+@media (max-width: 400px) {
+  .btn-xmas { width: 46px; height: 46px; font-size: 1.1rem; }
+}
+
+/* ---------- MERRY CHRISTMAS ---------- */
+.merry {
+  font-family: "Mountains of Christmas", cursive;
+  font-size: clamp(2.4rem, 9vw, 4.5rem);
+  color: var(--oro);
+  text-shadow: 0 0 10px rgba(241,196,15,.7), 3px 3px 0 var(--rosso);
+  opacity: 0;
+  transform: scale(.5);
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: all .6s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.merry.show {
+  opacity: 1;
+  transform: scale(1);
+  height: auto;
+  overflow: visible; /* non tagliare il bagliore */
+  margin-bottom: 1.5rem;
+  animation: glow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 6px rgba(241,196,15,.5), 3px 3px 0 var(--rosso); }
+  to   { text-shadow: 0 0 22px rgba(241,196,15,1), 3px 3px 0 var(--rosso); }
+}
+
+/* ---------- NEVE ---------- */
+#snow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+main { position: relative; z-index: 1; }
+
+.flake {
+  position: absolute;
+  top: -10px;
+  color: white;
+  user-select: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(105vh) rotate(360deg); }
+}
